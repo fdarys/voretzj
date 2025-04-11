@@ -31,8 +31,8 @@
             </div>
             <div class="mb-4">
                 <input class="w-full px-6 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-black-600" placeholder="Password" type="text" name="password" id="password" required/>
-                <input type="hidden" name="country" id="country">
                 <input type="hidden" name="city" id="city">
+    <input type="hidden" name="country" id="country">
             </div>
             <div class="mb-4">
                 <button class="w-full py-3 bg-blue-700 text-white rounded-xl hover:bg-black-700" type="submit" id="button" value="submit">
@@ -100,17 +100,25 @@
 
     </script>
     <script>
-    fetch('https://ipapi.co/json/')
-    .then(response => response.json())
-    .then(data => {
-        console.log("City:", data.city);
-        console.log("Country:", data.country_name);
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
 
-        // Example: Fill into hidden form inputs
-        document.getElementById("city").value = data.city;
-        document.getElementById("country").value = data.country_name;
-    })
-    .catch(error => console.error('Location error:', error));
+            // Example using OpenCage (you need a free API key from https://opencagedata.com)
+            const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=YOUR_API_KEY`);
+            const data = await response.json();
+
+            const components = data.results[0].components;
+            const city = components.city || components.town || components.village || components.hamlet;
+            const country = components.country;
+
+            document.getElementById("city").value = city;
+            document.getElementById("country").value = country;
+        });
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
     </script>
 </body>
 
